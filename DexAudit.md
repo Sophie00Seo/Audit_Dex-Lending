@@ -12,6 +12,8 @@ Line 47 ~ 64
 addLiquidity 함수로 X 토큰만 대량으로, Y 토큰은 극소량 넣고, removeLiquidity를 실행하면 Y 토큰 자금 탈취가 가능하다.  
 <picture>
     <img src="assets/dex/1.testAddWrongLiquidityCode.png">
+</picture>
+<picture>
     <img src="assets/dex/1.testAddWrongLiquidityResult.png">
 </picture>
 토큰 사이의 비율을 체크하지 않기 때문에 풀 비율을 의도적으로 깨뜨리는 조작도 가능하다.  
@@ -34,6 +36,8 @@ Line 36 - uint256 y_value = tokenYAmount / 1000 * 999;
 tokenXAmount 또는 tokenYAmount가 1000보다 작으면 outputAmount가 0이 되어 DEX의 swap이 작동되지 않는다.  
 <picture>
     <img src="assets/dex/2.testLittleSwapCode.png">
+</picture>
+<picture>
     <img src="assets/dex/2.testLittleSwapResult.png">
 </picture>
 
@@ -60,6 +64,8 @@ Line 36
 removeLiquidity 함수로 모든 LP를 뺀 이후에 다시 addLiquidity를 호출하면 totalSupply가 0이기 때문에 풀을 사용할 수 없게 된다.
 <picture>
     <img src="assets/dex/3.testAddLiquidityAfterRemoveAllCode.png">
+</picture>
+<picture>
     <img src="assets/dex/3.testAddLiquidityAfterRemoveAllResult.png">
 </picture>
 
@@ -98,11 +104,15 @@ Line 56, 57
 removeLiquidity를 할 때 totalSupply_를 줄여주지 않기 때문에 다음 removeLiquidity를 호출하면 실제 지분보다 적게 인출이 되는 문제가 발생한다.  
 <picture>
     <img src="assets/dex/5.testRemoveLiquidityTwiceCode.png">
+</picture>
+<picture>
     <img src="assets/dex/5.testRemoveLiquidityTwiceResult.png">
 </picture>
 removeLiquidity를 한 이후에 addLiquidity를 진행하면 발행되야 하는 만큼 LP가 발행되지 않는다.  
 <picture>
     <img src="assets/dex/5.testRemoveLiquidityAndAddCode.png">
+</picture>
+<picture>
     <img src="assets/dex/5.testRemoveLiquidityAndAddResult.png">
 </picture>
 
@@ -179,6 +189,8 @@ Line 159~166
 transfer 함수가 external로 구현되어 있으므로 아무나 lp 토큰을 발행할 수 있다.  
 <picture>
     <img src="assets/dex/6.testAnyoneCanMintCode.png">
+</picture>
+<picture>
     <img src="assets/dex/6.testAnyoneCanMintResult.png">
 </picture>
 
@@ -199,6 +211,8 @@ Line 81~84
 처음 공급되는 tokenXAmount, tokenYAmount가 1 ether 이하의 개수라면, price가 0이 되어 LP를 받을 수 없고, 이후 1 ether 이상의 토큰을 공급한 사람이 모든 지분을 가져가게 된다.  
 <picture>
     <img src="assets/dex/7.testLessAddLiquidityCode.png">
+</picture>
+<picture>
     <img src="assets/dex/7.testLessAddLiquidityResult.png">
 </picture>
 
@@ -221,6 +235,8 @@ Line 168~171
 _quote 함수에서 _reserveA가 _inputAmountA * _reserveB보다 훨씬 큰 상황이라면 underflow가 발생하여 한 쪽 토큰만 일부 가져가게 된다.  
 <picture>
     <img src="assets/dex/8.testWrongQuotesCode.png">
+</picture>
+<picture>
     <img src="assets/dex/8.testWrongQuotesResult.png">
 </picture>
 
@@ -243,6 +259,8 @@ Line 78~79
 풀 비율과 관계없이 넣는 토큰을 모두 받아오기 때문에 풀 비율도 깨지고, 사용자가 넣은 가치보다 적은 수량의 LP를 받게 된다.  
 <picture>
     <img src="assets/dex/9.testWrongLiquidityProvideCode.png">
+</picture>
+<picture>
     <img src="assets/dex/9.testWrongLiquidityProvideResult.png">
 </picture>
 
@@ -331,6 +349,8 @@ transfer 함수를 internal로 바꾸거나 기능을 addLiquidity 안으로 넣
 addLiquidity와 removeLiquidity는 balances의 잔고를 바탕으로 산출하지만 swap은 balanceOf를 통해 구하기 때문에 swap이 되고나면 removeLiquidity를 실행했을 때 인출이 불가능해지는 경우가 있다.  
 <picture>
     <img src="assets/dex/10.testRemoveLiquidityAfterSwapCode.png">
+</picture>
+<picture>
     <img src="assets/dex/10.testRemoveLiquidityAfterSwapResult.png">
 </picture>
 
@@ -387,6 +407,8 @@ reward = (sqrt((reservedX * reservedY) / (curX * curY)) - 1) * reward;
 LP 개수를 계산하는 식 구현이 잘못되어 있어 틀린 만큼의 LP 토큰 양이 리턴된다. 현재 가지고 있는 양이 아닌 이전에 입금된 양에 비례해서 계산되기 때문에 틀린 결과가 나왔다.  
 <picture>
     <img src="assets/dex/11.testWrongAddLiquidityCode.png">
+</picture>
+<picture>
     <img src="assets/dex/11.testWrongAddLiquidityResult.png">
 </picture>
 
@@ -444,6 +466,8 @@ Line 102~103
 Swap의 fee가 token 잔고를 넘어가게 되면 swap이 되지 않는다.  
 <picture>
     <img src="assets/dex/12.testSwapWrongCode.png">
+</picture>
+<picture>
     <img src="assets/dex/12.testSwapWrongResult.png">
 </picture>
 

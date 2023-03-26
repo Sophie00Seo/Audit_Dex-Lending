@@ -42,6 +42,8 @@ uint256 user_collateral = map_user_deposit_token_amount[user][eth_address] * eth
 usdc의 가격이 10 ** 18일 것으로 고정하여 계산이 되었다.  
 <picture>
     <img src="assets/lending/2-1.testUSDCPriceChangeCode.png">
+</picture>
+<picture>
     <img src="assets/lending/2-1.testUSDCPriceChangeResult.png">
 </picture>
 
@@ -132,6 +134,8 @@ vaults[msg.sender].availableBorrowETH2USDC = vaults[msg.sender].collateralETH * 
 USDC 가격이 1이라는 전제를 가지고 만들어진 코드이다. 가격이 1에서 벗어나게 되면 빌려주는 USDC의 가치를 잘못 잡게 된다. Usdc가 2배 이상 오른다면 담보물보다 더 큰 가치의 USDC를 빌려줄 수도 있다.  
 <picture>
     <img src="assets/lending/2-2.testUSDCPriceChangeCode.png">
+</picture>
+<picture>
     <img src="assets/lending/2-2.testUSDCPriceChangeResult.png">
 </picture>
 
@@ -170,6 +174,8 @@ function _getMaxBorrowCurrentDebtCheck(address user) internal view returns (uint
 USDC 가격이 1이라는 전제를 가지고 만들어진 코드이다. 가격이 1에서 벗어나게 되면 빌려주는 USDC의 가치를 잘못 잡게 된다. Usdc가 2배 이상 오른다면 담보물보다 더 큰 가치의 USDC를 빌려줄 수도 있다.  
 <picture>
     <img src="assets/lending/2-3.testUSDCPriceChangeCode.png">
+</picture>
+<picture>
     <img src="assets/lending/2-3.testUSDCPriceChangeResult.png">
 </picture>
 
@@ -193,6 +199,8 @@ amount = getAccruedSupplyAmount(tokenAddress) / WAD * WAD;
 WAD로 나누기 때문에 1e18보다 작은 amount는 0이 되어버려 인출이 불가능해진다.  
 <picture>
     <img src="assets/lending/4.testLittleUSDCCode.png">
+</picture>
+<picture>
     <img src="assets/lending/4.testLittleUSDCResult.png">
 </picture>
 
@@ -224,6 +232,8 @@ Line 149~158
 withdraw한 금액이 전체 금액에만 반영되기 때문에 다시 withdraw를 해도 막는 장치가 없다.  
 <picture>
     <img src="assets/lending/5-1.testWithdrawDoubleCode.png">
+</picture>
+<picture>
     <img src="assets/lending/5-1.testWithdrawDoubleResult.png">
 </picture>
 
@@ -300,6 +310,8 @@ usdc.transferFrom(
 ```
 <picture>
     <img src="assets/lending/6.testDepositTwiceCode.png">
+</picture>
+<picture>
     <img src="assets/lending/6.testDepositTwiceResult.png">
 </picture>
 
@@ -341,6 +353,8 @@ Line 149~158
 withdraw한 금액이 전체 금액에만 반영되기 때문에 다시 withdraw를 해도 막는 장치가 없다.  
 <picture>
     <img src="assets/lending/5-2.testWithdrawManyCode.png">
+</picture>
+<picture>
     <img src="assets/lending/5-2.testWithdrawManyResult.png">
 </picture>
 
@@ -458,6 +472,8 @@ modifier setInterest {
 시간과 유저 수에 따라 for문이 이중으로 있어, 실행 횟수가 급격하게 증가하기 때문에 가스비 이슈가 존재한다. 유저가 2명이고 {deposit(ether, usdc), borrow, 7199 block 지남, repay}와 같이 간단한 함수만 진행했음에도 가스비가 4335404만큼 나왔다. repay를 제외하고 코드를 실행하면 가스비가 397342만큼 나오기 때문에 repay 함수 하나가 거의 4M만큼 사용된다.  
 <picture>
     <img src="assets/lending/10.testGasCode.png">
+</picture>
+<picture>
     <img src="assets/lending/10.testGasResult.png">
 </picture>
 
