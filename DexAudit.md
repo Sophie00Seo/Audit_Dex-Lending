@@ -478,3 +478,38 @@ Swap의 fee가 token 잔고를 넘어가게 되면 swap이 되지 않는다.
 ### 해결방안
 
 removeLiquidity과 swap을 할 때 fee 또한 업데이트 해준다.  
+
+# seojihye
+
+## 8. AddLiquidity underflow
+
+### 설명
+
+function addLiquidity  
+Line 67  
+```
+lpAmount = tokenXAmount * tokenYAmount / _decimal;
+```
+overflow가 날 것을 우려하여 _decimal을 곱하였으나, 토큰 양이 너무 적으면 underflow가 발생하게 된다.
+
+### 파급력 (Low)
+
+두 토큰 양의 곱이 1e18을 넘지 않게 유동성을 공급한 사용자만 손해를 보게 된다.  
+
+### 해결방안
+
+두 토큰 양의 곱의 sqrt와 같은 방법을 사용하여 적은 수량의 토큰도 반영이 될 수 있도록 한다.  
+
+## 14. amount가 0이 되면 transfer 막기
+
+### 설명
+
+0이 transfer되는 경우까지도 모든 연산을 진행하여 true를 리턴한 후에 종료되기 때문에 비효율적이다.  
+
+### 파급력 (Informational)
+
+연산할 필요가 없는 코드가 존재해, 유저가 수수료 상의 손해를 볼 수 있다.  
+
+### 해결방안
+
+transfer, call 이전에 amount가 0이면 revert를 낸다.  
