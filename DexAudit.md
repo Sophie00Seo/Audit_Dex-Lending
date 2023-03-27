@@ -399,7 +399,8 @@ transfer 함수 구현
 ### 설명
 
 function addLiquidity  
-Line 128`~130, 137`~139  
+Line 128~130, 
+137~139  
 ```
 reward = (sqrt((reservedX * reservedY) / (curX * curY)) - 1) * reward;
 reward = (sqrt((reservedX * reservedY) / (curX * curY)) - 1) * reward;
