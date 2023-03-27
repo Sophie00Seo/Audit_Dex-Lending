@@ -399,7 +399,7 @@ transfer 함수 구현
 ### 설명
 
 function addLiquidity  
-Line 128~130, 137~139  
+Line 128`~130, 137`~139  
 ```
 reward = (sqrt((reservedX * reservedY) / (curX * curY)) - 1) * reward;
 reward = (sqrt((reservedX * reservedY) / (curX * curY)) - 1) * reward;
@@ -417,8 +417,7 @@ LP 개수를 계산하는 식 구현이 잘못되어 있어 틀린 만큼의 LP 
 
 ### 해결방안
 
-아래와 같이 이전 입금 양이 아닌 전체 양으로 수정한다.  
-reward = (sqrt((reservedX * reservedY) / (curX * curY)) - 1) * totalReward;  
+이전 입금 양이 아닌 전체 양과의 비율로 수정한다.  
 
 ## 4. transfer 함수 미구현
 
